@@ -8,6 +8,7 @@ savefile = input('Nome do arquivo a ser salvo (ex: something.md): ')
 baseroute = input('Rota base (ex: /api): ')
 apipermissions = input('Quais são todas as permissões existentes na sua API? ').upper().split(' ')
 
+# Create the save file and put the current datetime
 file = open(savefile, 'a')
 file.write(f'\n\n----------------- {time.localtime()} -----------------')
 file.close()
@@ -22,10 +23,12 @@ def exec():
   oldPermissions = pick(apipermissions, 'Permissões necessárias: (selecione com o ESPAÇO, confirme com ENTER)', '→', 0, True)
   permissions = []
 
+  # Transform oldPermissions on a list in permissions
   for permission in oldPermissions:
     permissions.append(permission[0])
 
   print(f'Permissões necessárias: {permissions}')
+
   body = ''
   havebody = 'NÃO'
 
@@ -35,7 +38,7 @@ def exec():
 
     if (havebody == 'SIM'):
       print('Digite o modelo de body abaixo:')
-      while (True):
+      while (True): # allow multiline input
         event = keyboard.read_event()
 
         if (event.is_keypad and event.name == 'enter'): 
@@ -48,7 +51,7 @@ def exec():
   print('Digite o modelo de response abaixo:')
 
   response = ''
-  while (True):
+  while (True): # allow multiline input
     event = keyboard.read_event()
 
     if (event.is_keypad and event.name == 'enter'): 
@@ -77,6 +80,7 @@ def exec():
 ```
 </details>"""
 
+  # Each concluded route is saved on savefile
   file = open(savefile, 'a')
   file.write('\n\n' + returnvalue)
   file.close()
